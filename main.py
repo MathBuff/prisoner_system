@@ -1,4 +1,6 @@
 #____Import_Lines_________________________________________________________________
+
+
 import random
 
 from prisonerid import PrisonerID
@@ -153,12 +155,6 @@ main_character.prisoner_number = random_4_digit_number()
 main_character.crimes.append(crime_generator())
 
 main_character.print_info()
-
-#print("Name:", main_character.first_name, main_character.last_name)
-#print("Birth Date:", main_character.birthday)
-#print("Prison_number:", main_character.prisoner_number)
-#print("Crime:", )
-
 
 
 
