@@ -1,6 +1,5 @@
 #____Import_Lines_________________________________________________________________
 
-
 import random
 
 from prisonerid import PrisonerID
@@ -22,11 +21,14 @@ def valid_date(date):
 
 #____Customs______________________________________________________________________
 
-def is_integer(x):
+def string_is_number(value):
+    return isinstance(value, str) and value.isdigit()
+
+def number_is_integer(x):
     return isinstance(x, int)
 
 def is_natural_number(x):
-    return is_integer(x) and x >= 0
+    return number_is_integer(x) and x >= 0
 
 def number_in_inclusive_range(number, initial, final):
     if number <= final and number >= initial:
@@ -120,7 +122,6 @@ def terminal_menu_prompt(options):
 
 
 #____PROGRAM_BELOW___________________________________________________________________
-
 current_date = "June 12th, 1987"
 main_character = PrisonerID()
 
@@ -143,13 +144,30 @@ if birthday == "":
     birthday = random_date("1/1/1900", "6/12/1969")
 main_character.birthday = birthday
 
-print("Enter a string to select race:", end ="")
-response = input()
-if response != "":
-    print("_RACE_ENTRY_")
-    main_character.race = terminal_menu_prompt(races)
-else:
-    main_character.race = race_generator()
+print("_RACE_ENTRY_")
+print("----------------------------------------------")
+for i, race in enumerate(races):
+    print(i, race)
+print("----------------------------------------------")
+print("Enter Selection Index: ", end="")
+while True :
+    entry = input()
+        
+    if entry == "":
+        main_character.race = race_generator()
+        break    
+    elif string_is_number(value):
+        entry = int(entry)
+        if number_in_inclusive_range(entry, 0, len(races)- 1):
+            main_character.race = races[int(entry)]
+            break   
+             
+             #I'm doing checks for entry to complete this section here to make the custom entry menyu for races.
+             
+             
+             
+             
+    print("Error: Selection Index must be a whole number between 0 and", len(races)-1,": ", end="")
 
 main_character.prisoner_number = random_4_digit_number()
 main_character.crimes.append(crime_generator())
