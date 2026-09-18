@@ -8,6 +8,8 @@ from datetime import datetime
 
 from prisoner_generator import crime_generator, name_generator, random_date, race_generator, races
 
+from colortext import color
+
 #___Main_Functions________________________________________________________________
 def random_4_digit_number():
     return random.randint(1000, 9999)
@@ -125,47 +127,43 @@ def terminal_menu_prompt(options):
 current_date = "June 12th, 1987"
 main_character = PrisonerID()
 
-print("Enter prisoner First Name: ", end="")
+print("Enter prisoner"+color["green"]+" First Name"+color["reset"]+": ", end="")
 first_name = terminal_string_input_of_size_prompt(12)
 if first_name == "":
     first_name = name_generator()
 main_character.first_name = first_name
 
-print("Enter Prisoner Last Name: ", end="")
+print("Enter Prisoner"+color["green"]+" Last Name"+color["reset"]+": ", end="")
 last_name = terminal_string_input_of_size_prompt(12)
 if last_name == "":
     last_name = name_generator()
 
 main_character.last_name = last_name
 
-print("Enter Prisoner birthday: ", end="")
+print("Enter Prisoner "+color["cyan"]+"birthday"+color["reset"]+": ", end="")
 birthday = terminal_calendar_date_prompt()
 if birthday == "":
     birthday = random_date("1/1/1900", "6/12/1969")
 main_character.birthday = birthday
 
-print("_RACE_ENTRY_")
+print(color["yellow"]+ "_RACE_ENTRY_" +color["reset"])
 print("----------------------------------------------")
 for i, race in enumerate(races):
-    print(i, race)
+    print(color["red"] + str(i) + color["reset"], race)
 print("----------------------------------------------")
 print("Enter Selection Index: ", end="")
 while True :
-    entry = input()
+    entry = input(color["red"])
+      #print(color["red"])
         
     if entry == "":
         main_character.race = race_generator()
         break    
-    elif string_is_number(value):
+    elif string_is_number(entry):
         entry = int(entry)
         if number_in_inclusive_range(entry, 0, len(races)- 1):
             main_character.race = races[int(entry)]
-            break   
-             
-             #I'm doing checks for entry to complete this section here to make the custom entry menyu for races.
-             
-             
-             
+            break                   
              
     print("Error: Selection Index must be a whole number between 0 and", len(races)-1,": ", end="")
 

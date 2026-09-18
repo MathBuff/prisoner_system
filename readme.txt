@@ -1,1 +1,3 @@
 This project is for the lols because lectures are epically boring around my python class.
+dependencies:
+pip install colorama
